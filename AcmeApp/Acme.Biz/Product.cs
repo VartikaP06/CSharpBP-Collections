@@ -15,12 +15,24 @@ namespace Acme.Biz
         #region Constructors
         public Product()
         {
+            #region Generic Lists
             var colorOptions = new List<string>()
             {
                 "Red", "Espresso", "White", "Navy"
             };
 
             Console.WriteLine(colorOptions);
+
+            #endregion Generic Lists
+
+            var states = new Dictionary<string, string>
+            {
+                { "CA", "California" },
+                { "WA", "Washington DC" },
+                { "NY", "New York" }
+            };
+
+            Console.WriteLine(states);
         }
 
         public Product(int productId,
