@@ -55,6 +55,32 @@ namespace Acme.Biz
             return vendors;
         }
 
+        public Dictionary<string, Vendor> RetrieveWithKeys()
+        {
+            var vendors = new Dictionary<string, Vendor>()
+            {
+                { "ABC Corp", new Vendor{ VendorId = 1, CompanyName = "ABC Corp", Email = "abc@abc.com" } },
+                { "XYZ Inc", new Vendor{ VendorId = 2, CompanyName = "XYZ Inc", Email = "xyz@xyz.com" } },
+            };
+
+            foreach (var element in vendors)
+            {
+                Console.WriteLine($"Key : {element.Key} & Value : {element.Value}");
+            }
+
+            //foreach (var companyName in vendors.Keys)
+            //{
+            //    Console.WriteLine(vendors[companyName]);
+            //}
+
+            //if(vendors.TryGetValue("XYZ Inc", out var vendor))
+            //{
+                //Console.WriteLine(vendor);
+            //}
+            
+            return vendors;
+        }
+
         public T RetrieveValue<T>(string sql, T defaultValue)
         {
             T value = defaultValue;
