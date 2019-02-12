@@ -31,7 +31,7 @@ namespace Acme.Biz
             return vendor;
         }
 
-        public List<Vendor> Retrieve()
+        public IEnumerable<Vendor> Retrieve()
         {
             if(vendors == null)
             {
@@ -39,12 +39,6 @@ namespace Acme.Biz
 
                 vendors.Add(new Vendor() { VendorId = 1, CompanyName = "ABC Corp", Email = "abc@abc.com" });
                 vendors.Add(new Vendor() { VendorId = 2, CompanyName = "XYZ Inc", Email = "xyx@xyz.com" });
-            }
-
-            foreach (var vendor in vendors)
-            {
-                vendor.CompanyName = vendor.CompanyName.ToUpper();
-                Console.WriteLine(vendor);
             }
 
             for (int i = 0; i < vendors.Count; i++)
@@ -55,30 +49,15 @@ namespace Acme.Biz
             return vendors;
         }
 
-        public Dictionary<string, Vendor> RetrieveWithKeys()
+        public IEnumerable<Vendor> RetrieveWithIterator()
         {
-            var vendors = new Dictionary<string, Vendor>()
-            {
-                { "ABC Corp", new Vendor{ VendorId = 1, CompanyName = "ABC Corp", Email = "abc@abc.com" } },
-                { "XYZ Inc", new Vendor{ VendorId = 2, CompanyName = "XYZ Inc", Email = "xyz@xyz.com" } },
-            };
+            this.Retrieve();
 
-            foreach (var element in vendors)
+            foreach (var vendor in vendors)
             {
-                Console.WriteLine($"Key : {element.Key} & Value : {element.Value}");
+                Console.WriteLine($"Vendor Id: {vendor.VendorId}");
+                yield return vendor;
             }
-
-            //foreach (var companyName in vendors.Keys)
-            //{
-            //    Console.WriteLine(vendors[companyName]);
-            //}
-
-            //if(vendors.TryGetValue("XYZ Inc", out var vendor))
-            //{
-                //Console.WriteLine(vendor);
-            //}
-            
-            return vendors;
         }
 
         public T RetrieveValue<T>(string sql, T defaultValue)
